@@ -7,12 +7,17 @@ def masa_molar(compuesto):
     f = formula(compuesto)
     return f.mass
 
+nombre = input("Hola, ¿cómo te llamas? ").upper()
+
+print(f"BIENVENIDO/A {nombre} AL PROGRAMAS DE CÁLCULOS ESTEQUIOMÉTRICOS\n")
+print("Aqui podrás resolver tus problemas de químicas de forma rápida y sencilla ")
+
 def calcular():
     # Entrada de datos
     reaccion = input("Ingrese la reacción química (ej: H2 + O2 -> H2O): ")
-    compuesto_origen = input("Compuesto de origen: ")
-    masa_origen = float(input("Masa del compuesto origen (g): "))
-    compuesto_objetivo = input("Compuesto objetivo: ")
+    compuesto_origen = input("ingrese el Compuesto de origen: ")
+    masa_origen = float(input("ingrese la masa del compuesto origen (g): "))
+    compuesto_objetivo = input("ingrese el Compuesto objetivo: ")
 
     # Proceso: balanceo
     reac, prod = balance_stoichiometry(
