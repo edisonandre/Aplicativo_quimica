@@ -1,55 +1,53 @@
-from chempy.chemistry import balance_stoichiometry
-
 from periodictable import formula
+from tkinter import *
+
 
 def masa_molar(compuesto):
     """Calcula la masa molar de un compuesto químico."""
     f = formula(compuesto)
     return f.mass
 
-decicion = input("BIENVENID@S Deceas continuar con el programa (CALCULOS_ESTEQUIOMETRICOS)").lower()
+nombre = input("Hola, ¿cómo te llamas? ").capitalize()
 
-while decicion == "si":
-    
-    nombre = input("Hola, ¿cómo te llamas? ").upper()
 
-    print(f"BIENVENIDO/A {nombre} AL PROGRAMAS DE CÁLCULOS ESTEQUIOMÉTRICOS\n")
-    print("Aqui podrás resolver tus problemas de químicas de forma rápida y sencilla ")
-    def calcular():
-        # Entrada de datos
-        reaccion = input("Ingrese la reacción química (ej: H2 + O2 -> H2O): ")
-        compuesto_origen = input("ingrese el Compuesto de origen: ")
-        masa_origen = float(input("ingrese la masa del compuesto origen (g): "))
-        compuesto_objetivo = input("ingrese el Compuesto objetivo: ")
-    
-        # Proceso: balanceo
-        reac, prod = balance_stoichiometry(
-            *[s.split(' + ') for s in reaccion.split(' -> ')]
-        )
-    
-        # Coeficientes estequiométricos
-        coef_origen = reac.get(compuesto_origen, prod.get(compuesto_origen))
-        coef_objetivo = reac.get(compuesto_objetivo, prod.get(compuesto_objetivo))
-    
-        # Masas molares
-        mm_origen = masa_molar(compuesto_origen)
-        mm_objetivo = masa_molar(compuesto_objetivo)
-    
-        # Conversión: regla de 3
-        moles_origen = masa_origen / mm_origen
-        moles_objetivo = moles_origen * (coef_objetivo / coef_origen)
-        masa_objetivo = moles_objetivo * mm_objetivo
-    
-        # Resultado
-        print(f"\nResultados:")
-        print(f"Masa molar {compuesto_origen}: {mm_origen:.2f} g/mol")
-        print(f"Masa molar {compuesto_objetivo}: {mm_objetivo:.2f} g/mol")
-        print(f"Masa obtenida de {compuesto_objetivo}: {masa_objetivo:.2f} g\n")
-    if __name__ == "__main__":
-        calcular()
+def calcular():
+    print("\n=== CÁLCULOS ESTEQUIOMÉTRICOS ===")
+    print("Aqui podrás resolver tus problemas de químicas de forma rápida y sencilla \n")
+
+    # Entrada de datos
+    comp1 = input(f"{nombre} Por favor Ingrese el primer reactivo (ej: H2): ")
+    masa1 = float(input(f"{nombre} Por favor ingrese la masa de {comp1} (g): "))
+    comp2 = input(f"{nombre} Por favor ingrese el segundo reactivo (ej: O2): ")
+    masa2 = float(input(f"{nombre} Por favor ingrese la masa de {comp2} (g): "))
+
+    # Masas molares
+    mm1 = masa_molar(comp1)
+    mm2 = masa_molar(comp2)
+
+    # Conversión a moles
+    moles1 = masa1 / mm1
+    moles2 = masa2 / mm2
+
+    # Resultados finales
+    print("\n=== RESULTADO FINAL ===")
+    print(f"{moles1:.1f} mol de {comp1}")
+    print(f"{moles2:.1f} mol de {comp2}")
+
+def menu():
+    while True:
+        print("\n===== MENÚ PRINCIPAL =====")
+        print("1. Realizar un cálculo estequiométrico")
+        print("2. Salir")
         
-    decicion = input("Deseas ingresar otras reacciones quimicas").lower()
-    if decicion == "no":
-        break
+        opcion = input("Por favor Seleccione una opción: ")
+        
+        if opcion == "1":
+            calcular()
+        elif opcion == "2":
+            print(f"¡Gracias por usar el programa! 😊 Deseo que vuelvas {nombre}")
+            break
+        else:
+            print("Opción no válida, intente de nuevo.")
 
-
+if __name__ == "__main__":
+    menu()
