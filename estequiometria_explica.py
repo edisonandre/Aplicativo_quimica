@@ -125,7 +125,7 @@ class App(tk.Tk):
         y pruebas unitarias (por ejemplo: App(backend=my_backend)).
     """
     def __init__(self):
-        # Inicializar la ventana principal (constructor de Tk)
+        # Inicializar la ventana principal (constructor de Tk
         super().__init__()
         # Título de la ventana
         self.title(APP_TITLE)
